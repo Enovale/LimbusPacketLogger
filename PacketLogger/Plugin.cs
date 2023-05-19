@@ -17,15 +17,15 @@ namespace PacketLogger
         {
             PluginLog = Log;
         }
-
+        
         public override void Load()
         {
             // Plugin startup logic
-            var harmony = new Harmony($"com.enovale.{MyPluginInfo.PLUGIN_GUID}");
-            harmony.PatchAll(typeof(RequesterPatches));
-
             LogPackets = Config.Bind("General", nameof(LogPackets), true,
                 "Whether or not to print outgoing packets to the console.");
+            
+            var harmony = new Harmony($"com.enovale.{MyPluginInfo.PLUGIN_GUID}");
+            harmony.PatchAll(typeof(RequesterPatches));
             
             Log.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
         }
